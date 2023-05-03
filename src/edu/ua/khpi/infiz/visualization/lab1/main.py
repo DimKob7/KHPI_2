@@ -2,28 +2,32 @@ from matplotlib.ticker import MaxNLocator, FormatStrFormatter
 from collections import namedtuple
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
-#from pylatex import *
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator
 import numpy as np
 import matplotlib.pyplot as plt
 
-x = np.arange(0, 2, 0.01)
+x = np.arange(-2, 2, 0.01)
 y = (1 + x * np.exp(-x)) * (np.sin(x) ** 2) / (2 + x ** 2)
-def z_func():
-    z = 0
-    if x.all() <0:
+def z_func(x):
+    if x <0:
         z=(1+5*x)/(3+x**2)
-    elif x.all() >= 1:
+
+    elif x >= 1:
         z= (np.sin(x+1)**3)*np.exp(0.6*x)
+
     else:
         z=(np.sin(x)**2)*np.sqrt(5+x)
 
     return z
 
+Z = np.array([z_func(i) for i in x])
 ax = plt.subplot()
 plt1 = ax.plot(x, y, label=r"$y=\frac{(1+x*\exp(-x))*(\sin(x)**2)}{(2+x**2)}$")
-plt2 = ax.plot(x, z_func(), label=r'$z=\frac{1+5*x}{3+x**2} or (\sin(x+1)**3)*\exp(0.6*x) or (\sin(x)**2)*np.sqrt(5+x)$')
+plt2 = ax.plot(x, Z, label=r'$z=\frac{1+5*x}{3+x**2} or (\sin(x+1)**3)*\exp(0.6*x) or (\sin(x)**2)*np.sqrt(5+x)$')
+# plt2 = ax.plot(x, z1 , label=r'$z=\frac{1+5*x}{3+x**2} or (\sin(x+1)**3)*\exp(0.6*x) or (\sin(x)**2)*np.sqrt(5+x)$')
+# plt3 = ax.plot(x, z2, label=r'$z=\frac{1+5*x}{3+x**2} or (\sin(x+1)**3)*\exp(0.6*x) or (\sin(x)**2)*np.sqrt(5+x)$')
+# plt4 = ax.plot(x, z3, label=r'$z=\frac{1+5*x}{3+x**2} or (\sin(x+1)**3)*\exp(0.6*x) or (\sin(x)**2)*np.sqrt(5+x)$')
 plt.xlabel(r'$x$')
 plt.ylabel(r'$f(x)$')
 pos= ax.get_position()
@@ -174,7 +178,7 @@ ax.set_xticklabels(x_labels)
 ax.set_yticklabels(y_labels)
 ax.set_title('Світовий   товарний   експорт,   в   цінах   на   2000 р.')
 ax.set_ylabel('Країни')
-ax.set_xlabel('Роки')
+ax.set_xlabel('Рокі')
 ax.set_zlabel('Млрд долл')
 plt.savefig('photo6.png')
 plt.show()
