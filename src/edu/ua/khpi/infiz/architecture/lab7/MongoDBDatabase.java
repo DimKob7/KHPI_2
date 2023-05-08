@@ -1,0 +1,13 @@
+package edu.ua.khpi.infiz.architecture.lab7;
+
+class MongoDBDatabase extends Database {
+    @Override
+    void connect() {
+        System.out.println("Connected to MongoDB");
+    }
+
+    @Override
+    void executeQuery(String query) {
+        System.out.println("Executed query: " + query);
+    }
+}
