@@ -1,0 +1,25 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        git branch: 'main', url: 'https://github.com/DimKob7/devops_lab1.git'
+      }
+    }
+    stage('Build') {
+      steps {
+        script {
+          docker.build("devops_lab1:${env.BUILD_NUMBER}", ".")
+        }
+      }
+    }
+    stage('Run') {
+      steps {
+        script {
+          def dockerImage = docker.image("devops_lab1:${env.BUILD_NUMBER}")
+          def container = dockerImage.run()
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  webserver:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    restart: always
+  script:
+    build: .
+    volumes:
+      - /var/log/:/var/log/
+    restart: always
