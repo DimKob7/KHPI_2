@@ -35,7 +35,7 @@ public class Matrix {
 
     public Matrix add(Matrix other) {
         if (rows != other.rows || columns != other.columns) {
-            System.out.println("Розмірності матриць не співпадають виконання операцій додавання. Помилка!!!");
+            System.out.println("Розмірності матриць не співпадають для виконання операцій додавання. Помилка!!!");
             System.exit(0);
             //throw new IllegalArgumentException("Розмірності матриць не співпадають");
         }
@@ -54,7 +54,7 @@ public class Matrix {
 
     public Matrix subtract(Matrix other) {
         if (rows != other.rows || columns != other.columns) {
-            System.out.println("Розмірності матриць не співпадають виконання операцій віднімання. Помилка!!!");
+            System.out.println("Розмірності матриць не співпадають для виконання операцій віднімання. Помилка!!!");
             System.exit(0);
 //              throw new IllegalArgumentException("Розмірності матриць не співпадають");
         }

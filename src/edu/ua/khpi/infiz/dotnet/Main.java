@@ -7,13 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String stars = "********************";
-//        try {
-//            number = scanner.nextInt();
-//            marker = true;
-//            scanner.close();
-//        } catch (InputMismatchException e) {
-//            System.out.println("Wrong input! Stay calm and carry on!");
-//        }
+
         int rows1 = 0;
         int columns1 = 0;
         int rows2 = 0;
