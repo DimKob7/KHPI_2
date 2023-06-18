@@ -9,7 +9,15 @@ module "ec2" {
   ssh_key_name       = aws_key_pair.key_pair.key_name
   instance_type      = "t2.micro"
   instance_count     = (["1"])
-  user_data          = file("./install-instance-ec2-private.sh")
+  user_data = <<-EOF
+      #!/bin/bash
+      sudo apt-get update
+      sudo apt-get install -y docker.io
+      sudo docker run -d -p 9090:9090 --name prometheus prom/prometheus:latest
+      sudo docker run -d -p 3000:3000 --name grafana grafana/grafana:latest
+      sudo docker run -d -p 9100:9100 --name node-exporter prom/node-exporter:latest
+      sudo docker run -d -p 8080:8080 --name cadvisor-exporter google/cadvisor:latest
+      EOF
 }
 
 module "ec2_public" {
@@ -24,5 +32,11 @@ module "ec2_public" {
   instance_type               = "t2.micro"
   associate_public_ip_address = true
   instance_count              = (["1"])
-  user_data          = file("./install-instance-ec2-public.sh")
+  user_data = <<-EOF
+        #!/bin/bash
+        sudo apt-get update
+        sudo apt-get install -y docker.io
+        sudo docker run -d -p 9100:9100 --name node-exporter prom/node-exporter:latest
+        sudo docker run -d -p 8080:8080 --name cadvisor-exporter google/cadvisor:latest
+        EOF
 }
